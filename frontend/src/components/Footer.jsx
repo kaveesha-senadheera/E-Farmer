@@ -27,7 +27,7 @@ const Footer = () => {
 
             </div>
             <div>
-                <h1>E framer</h1>
+                <h1>E farmer</h1>
                 <br/>
             <div className="legal-links">
                 
