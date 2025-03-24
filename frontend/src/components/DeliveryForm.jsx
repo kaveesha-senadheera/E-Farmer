@@ -24,14 +24,24 @@ function DeliveryForm({ onUpdate, deliveries }) {
     setFormData({ deliveryId: '', driverName: '', destination: '', deliveryDate: '', status: 'COMPLETED' });
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    // Restrict driverName to only letters and spaces
+    if (name === "driverName" && !/^[A-Za-z\s]*$/.test(value)) {
+      return;
+    }
+
+    setFormData({ ...formData, [name]: value });
+  };
+
   return (
     <form onSubmit={handleSubmit} className="delivery-management-form">
       <div className="dm-header">
         <h2 className="dm-title">DELIVERY MANAGEMENT</h2>
         <Link to="/reports" type="button" className="dm-all-delivery-btn">ALL DELIVERY</Link>
-        
       </div>
-      
+
       <div className="dm-form-body">
         <div className="dm-form-group">
           <label className="dm-label">Delivery ID</label>
@@ -40,11 +50,12 @@ function DeliveryForm({ onUpdate, deliveries }) {
             type="text"
             placeholder="Delivery ID"
             value={formData.deliveryId}
-            onChange={e => setFormData({...formData, deliveryId: e.target.value})}
+            onChange={handleInputChange}
+            name="deliveryId"
             required
           />
         </div>
-        
+
         <div className="dm-form-group">
           <label className="dm-label">Destination</label>
           <input
@@ -52,11 +63,12 @@ function DeliveryForm({ onUpdate, deliveries }) {
             type="text"
             placeholder="Destination"
             value={formData.destination}
-            onChange={e => setFormData({...formData, destination: e.target.value})}
+            onChange={handleInputChange}
+            name="destination"
             required
           />
         </div>
-        
+
         <div className="dm-form-group">
           <label className="dm-label">Driver's Name</label>
           <input
@@ -64,11 +76,12 @@ function DeliveryForm({ onUpdate, deliveries }) {
             type="text"
             placeholder="Driver Name"
             value={formData.driverName}
-            onChange={e => setFormData({...formData, driverName: e.target.value})}
+            onChange={handleInputChange}
+            name="driverName"
             required
           />
         </div>
-        
+
         <div className="dm-form-group">
           <label className="dm-label">Delivery Date</label>
           <div className="dm-date-container">
@@ -77,8 +90,9 @@ function DeliveryForm({ onUpdate, deliveries }) {
               type="date"
               placeholder="dd/mm/yyyy"
               value={formData.deliveryDate}
-              onChange={e => setFormData({...formData, deliveryDate: e.target.value})}
-              onClick={e => e.target.showPicker}
+              onChange={handleInputChange}
+              name="deliveryDate"
+              onClick={e => e.target.showPicker()}
               required
             />
             <span className="dm-calendar-icon">
@@ -91,14 +105,16 @@ function DeliveryForm({ onUpdate, deliveries }) {
             </span>
           </div>
         </div>
-        
+
         <div className="dm-form-group">
           <label className="dm-label">Status</label>
           <div className="dm-select-container">
-            <select 
-              className="dm-select" 
-              value={formData.status} 
-              onChange={e => setFormData({...formData, status: e.target.value})}>
+            <select
+              className="dm-select"
+              value={formData.status}
+              onChange={handleInputChange}
+              name="status"
+            >
               <option value="PENDING">Pending</option>
               <option value="IN_PROGRESS">In Progress</option>
               <option value="COMPLETED">COMPLETED</option>
@@ -106,7 +122,7 @@ function DeliveryForm({ onUpdate, deliveries }) {
             </select>
           </div>
         </div>
-        
+
         <button type="submit" className="dm-submit-btn">SUBMIT</button>
       </div>
     </form>

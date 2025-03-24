@@ -11,7 +11,6 @@ function OrderForm({ order, onSave, onCancel }) {
   const validateForm = () => {
     const newErrors = {};
 
-
     if (!formData.postalCode || !/^\d{5}$/.test(formData.postalCode)) {
       newErrors.postalCode = 'Postal code must be exactly 5 digits';
     }
@@ -41,7 +40,14 @@ function OrderForm({ order, onSave, onCancel }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    // Restrict firstName and lastName to only letters and spaces
+    if ((name === "firstName" || name === "lastName") && !/^[A-Za-z\s]*$/.test(value)) {
+      return;
+    }
+
     setFormData({ ...formData, [name]: value });
+
     if (errors[name]) {
       setErrors({ ...errors, [name]: '' });
     }
@@ -88,7 +94,6 @@ function OrderForm({ order, onSave, onCancel }) {
               onChange={handleInputChange}
               required
             ></textarea>
-            
           </div>
 
           <div className="form-row">
@@ -111,7 +116,6 @@ function OrderForm({ order, onSave, onCancel }) {
               onChange={handleInputChange}
               required
             />
-            
           </div>
 
           <div className="form-row">
@@ -124,6 +128,7 @@ function OrderForm({ order, onSave, onCancel }) {
               onChange={handleInputChange}
             />
             {errors.postalCode && <span className="error">{errors.postalCode}</span>}
+
             <input
               type="text"
               className="form-input-half"
