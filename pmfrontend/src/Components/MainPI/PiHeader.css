@@ -1,0 +1,64 @@
+.pi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0a6240;
+    padding: 15px 30px;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    z-index: 100;
+  }
+  
+  .nav-left {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+  
+  .nav-link {
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    color: #f1f1f1;
+  }
+  
+  .dropdown-wrapper {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    background-color: white;
+    color: #333;
+    border-radius: 6px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 170px;
+  }
+  
+  .dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .profile-icon {
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s ease;
+  }
+  
+  .profile-icon:hover {
+    transform: scale(1.1);
+  }
+  

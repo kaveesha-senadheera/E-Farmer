@@ -1,0 +1,37 @@
+.main-pi-home {
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Full screen section with background image */
+.hero-section {
+  height: calc(100vh - 70px); /* adjust height if needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Dark overlay for text readability */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 40px 60px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 800px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.overlay p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}

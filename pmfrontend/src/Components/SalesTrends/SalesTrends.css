@@ -1,0 +1,77 @@
+.sales-trends-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.report-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.report-selector label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.report-selector select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.report-table th,
+.report-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.report-table th {
+    background: #007bff;
+    color: white;
+}
+
+.download-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-csv {
+    background: #28a745;
+    color: white;
+}
+
+.btn-pdf {
+    background: #dc3545;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}

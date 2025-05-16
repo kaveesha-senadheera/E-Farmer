@@ -1,0 +1,87 @@
+.store-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #025f3c;
+  padding: 10px 30px;
+  flex-wrap: wrap;
+  color: white;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  font-weight: 500;
+}
+
+.nav-links span {
+  cursor: pointer;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.search-bar {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  width: 180px;
+  margin-top: 18px;
+}
+
+.search-btn {
+  padding: 6px 12px;
+  background: #f0c040;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.icon-btn {
+  font-size: 1.4rem;
+  color: white;
+  cursor: pointer;
+}
+
+.cart-icon-container {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: red;
+  color: white;
+  padding: 2px 6px;
+  font-size: 11px;
+  border-radius: 50%;
+}
