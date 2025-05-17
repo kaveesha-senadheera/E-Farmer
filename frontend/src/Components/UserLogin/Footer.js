@@ -1,43 +1,57 @@
-import React from 'react';
-import './Footer.css'; // Add CSS in separate file
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Footer.css';
 
 const Footer = () => {
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        const userId = localStorage.getItem('userId');
+        const name = localStorage.getItem('userName');
+        if (userId) {
+            setIsLoggedIn(true);
+            setUserName(name || 'User');
+        }
+    }, []);
+
+    const handleProfileClick = () => {
+        navigate('/profile');
+    };
+
     return (
-        <footer>
-            <div className="contact-info">
-                <h3>Contact Us</h3>
-                <div className="social-media">
-                    <a href="#"><img  alt="Instagram" /></a>
-                    <a href="#"><img  alt="Facebook" /></a>
-                    <a href="#"><img  alt="WhatsApp" /></a>
+        <footer className="footer">
+            <div className="footer-content">
+                <div className="footer-left">
+                    <h3>E-FARMER</h3>
                 </div>
-                <p>Tel: 0765455918 / 0701025649</p>
-            </div>
-            <div className="powered-by">
-                <p>E-farmer powerd by 100% reneawble electricity</p>
-            </div>
-            <div className="footer-links">
+                
+                <div className="footer-center">
+                    <div className="newsletter">
+                        <input type="email" placeholder="YOUR E-MAIL" />
+                        <button>SUBSCRIBE</button>
+                    </div>
+                </div>
 
-            <ul>
-    <li><a href="/deliverys/create">Shipping & Delivery</a></li>
-    <li><a href="#">Events</a></li>
-    <li><a href="/feedbacks/full">Support</a></li>
-    <li><a href="/records">Return & Refunds</a></li>
-</ul>
-
+                <div className="footer-right">
+                    <div className="social-links">
+                        <a href="#"><i className="fab fa-instagram"></i></a>
+                        <a href="#"><i className="fab fa-facebook"></i></a>
+                        <a href="#"><i className="fab fa-twitter"></i></a>
+                    </div>
+                    {isLoggedIn && (
+                        <div className="user-profile-footer" onClick={handleProfileClick}>
+                            <div className="profile-icon-footer">
+                                {userName.charAt(0).toUpperCase()}
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
-            <div>
-                <h1>E framer</h1>
-                <br/>
-            <div className="legal-links">
-                
-                <ul>
-                    <li><a href="#">Terms of Use</a></li>
-                    <li><a href="#">Privacy Policies</a></li>
-                </ul>
-                
-                
-            </div>
+            <div className="footer-bottom">
+                <p>© 2025 E-FARMER. All Rights Reserved.</p>
+                <a href="/privacy-policy">PRIVACY POLICY</a>
             </div>
         </footer>
     );

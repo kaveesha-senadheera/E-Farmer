@@ -50,13 +50,13 @@ const getUserRole = async (req, res) => {
 
 
 const createUser = async (req, res) => {
-    const { nic, name, gmail, address, occupation, userType, password } = req.body;
+    const { nic, name, gmail, address, occupation, userType, password, companyName, taxId } = req.body;
 
     try {
-        // Check if the user already exists by NIC
-        const existingUser = await User.findOne({ nic });
+        // Check if the user already exists by NIC or email
+        const existingUser = await User.findOne({ $or: [{ nic }, { gmail }] });
         if (existingUser) {
-            return res.status(400).json({ message: "User with this NIC already exists" });
+            return res.status(400).json({ message: "User with this NIC or email already exists" });
         }
 
         // Hash the password before saving it
@@ -71,42 +71,60 @@ const createUser = async (req, res) => {
             address,
             occupation,
             userType,
-            password: password,
+            password: hashedPassword,
+            companyName,
+            taxId,
+            role: userType === "admin" ? "admin" : "user"
         });
 
         await newUser.save();
-
         return res.status(201).json({ message: "User created successfully", newUser });
     } catch (err) {
+        console.error("Registration error:", err);
         return res.status(500).json({ message: "Server error: " + err.message });
     }
 };
 
 const loginUser = async (req, res) => {
+    const { gmail, password } = req.body;
+
     if (!gmail || !password) {
-        return res.status(400).json({ message: "Gmail and password are required" });
-      }
-    
-      try {
-        // Find the user by Gmail
+        return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    try {
+        // Find the user by email
         const user = await User.findOne({ gmail });
         if (!user) {
-          return res.status(400).json({ message: "User not found" });
+            return res.status(400).json({ message: "User not found" });
         }
-    
-        // Check if the entered password matches the one in the database (Plain text comparison)
-        if (user.password !== password) {
-          return res.status(400).json({ message: "Invalid credentials" });
+
+        // Compare the entered password with the hashed password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ message: "Invalid credentials" });
         }
-    
-        // If login is successful
-        res.status(200).json({ message: "Login successful", user });
-      } catch (err) {
+
+        // If login is successful, return user data (excluding password)
+        const userData = {
+            nic: user.nic,
+            name: user.name,
+            gmail: user.gmail,
+            address: user.address,
+            occupation: user.occupation,
+            userType: user.userType,
+            companyName: user.companyName,
+            taxId: user.taxId,
+            role: user.role
+        };
+
+        res.status(200).json({ message: "Login successful", user: userData });
+    } catch (err) {
+        console.error("Login error:", err);
         return res.status(500).json({ message: "Server error: " + err.message });
-      }
-    };
-  
-  
+    }
+};
+
 
 
 const updateUserByNIC = async (req, res) => {

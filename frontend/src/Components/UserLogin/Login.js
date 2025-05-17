@@ -19,24 +19,25 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Send GET request to backend with email and password as query params
-      const response = await axios.get("http://localhost:5002/users", {
-        params: {
-          gmail: formData.gmail,
-          password: formData.password,
-        },
+      // Send POST request to login endpoint
+      const response = await axios.post("http://localhost:5002/users/login", {
+        gmail: formData.gmail,
+        password: formData.password,
       });
 
-      if (response && response.data) {
-        // On successful login, you can store user details in localStorage
-        localStorage.setItem("userEmail", formData.gmail);  // Save the user's email for later use
+      if (response && response.data && response.data.user) {
+        // Store all user data in localStorage
+        const userData = response.data.user;
+        localStorage.setItem("userId", userData.nic);
+        localStorage.setItem("userEmail", userData.gmail);
+        localStorage.setItem("userName", userData.name);
+        localStorage.setItem("userType", userData.userType);
+        
         if (formData.gmail === "admin@gmail.com" && formData.password === "admin") {
-            // Redirect to users page if admin
-            navigate("/users");
-          } else {
-            // Redirect to homepage or dashboard for other users
-            navigate("/");  
-          }
+          navigate("/users");
+        } else {
+          navigate("/profile"); // Redirect to profile page after successful login
+        }
       }
     } catch (err) {
       console.error("Error during login:", err);

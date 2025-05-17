@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './displayuser.css';
+import "./displayuser.css";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -37,11 +37,25 @@ const DisplayRetailUser = () => {
     setUpdatedData(user);
   };
 
+  // Prevents @ in the name field while typing
   const handleUpdateChange = (e) => {
-    setUpdatedData({ ...updatedData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "name" && value.includes("@")) {
+      alert("Name cannot contain '@'.");
+      return; // Stops updating state
+    }
+
+    setUpdatedData({ ...updatedData, [name]: value });
   };
 
   const handleUpdate = async () => {
+    // Final validation before saving
+    if (!/^[A-Za-z ]+$/.test(updatedData.name)) {
+      alert("Name should only contain letters and spaces (No '@' allowed).");
+      return;
+    }
+
     try {
       await axios.put(`http://localhost:5002/users/${editingUser}`, updatedData);
       alert("User updated successfully");
@@ -54,9 +68,11 @@ const DisplayRetailUser = () => {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <h2>Registered Users</h2>
-      {users.length === 0 ? <p>No users found</p> : (
+      {users.length === 0 ? (
+        <p>No users found</p>
+      ) : (
         <table border="1">
           <thead>
             <tr>
@@ -76,10 +92,42 @@ const DisplayRetailUser = () => {
                   <>
                     <td>{user.userType === "retail" ? "Retail User" : "Wholesale User"}</td>
                     <td>{user.nic}</td>
-                    <td><input type="text" name="name" value={updatedData.name} onChange={handleUpdateChange} /></td>
-                    <td><input type="email" name="gmail" value={updatedData.gmail} onChange={handleUpdateChange} /></td>
-                    <td><input type="text" name="address" value={updatedData.address} onChange={handleUpdateChange} /></td>
-                    <td><input type="text" name="occupation" value={updatedData.occupation} onChange={handleUpdateChange} /></td>
+                    <td>
+                      <input
+                        type="text"
+                        name="name"
+                        value={updatedData.name}
+                        onChange={handleUpdateChange}
+                        required
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="email"
+                        name="gmail"
+                        value={updatedData.gmail}
+                        onChange={handleUpdateChange}
+                        required
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="address"
+                        value={updatedData.address}
+                        onChange={handleUpdateChange}
+                        required
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        name="occupation"
+                        value={updatedData.occupation}
+                        onChange={handleUpdateChange}
+                        required
+                      />
+                    </td>
                     <td>
                       <button onClick={handleUpdate}>Save</button>
                       <button onClick={() => setEditingUser(null)}>Cancel</button>

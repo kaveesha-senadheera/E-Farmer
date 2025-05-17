@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Fix for the header spacing issue */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  margin-top: 75px; /* Match new header height */
+  min-height: calc(100vh - 150px); /* Account for new header and footer heights */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fix for background image path issues */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fix for button focus states */
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(10, 98, 64, 0.3);
+}
+
+/* Fix for mobile tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}

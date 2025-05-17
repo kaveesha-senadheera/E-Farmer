@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import './Register.css'; // Import the CSS file
+import "./Register.css"; // Import the CSS file
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -12,9 +12,7 @@ const Admin = () => {
     address: "",
     occupation: "",
     password: "",
-    userType: "retail",
-    companyName: "",
-    taxId: "",
+    userType: "admin",
   });
 
   const handleChange = (e) => {
@@ -23,6 +21,13 @@ const Admin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation: Prevent @ symbol in name
+    if (!/^[A-Za-z ]+$/.test(formData.name) || formData.name.includes("@")) {
+      alert("Name should only contain letters and spaces (No '@' allowed).");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:5002/users", formData);
       if (response && response.data) {
@@ -36,7 +41,7 @@ const Admin = () => {
           password: "",
           userType: "admin",
         });
-        navigate("/login");  // Redirect to login page after successful registration
+        navigate("/login");  
       } else {
         alert("Unexpected response format. Please check the backend.");
       }
