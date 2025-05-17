@@ -1,0 +1,719 @@
+
+
+/* Base styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  height: 100%;
+}
+
+body {
+  background-color: #89F336; /* Primary color as requested */
+  position: relative;
+}
+
+/* Background effect - subtle pattern overlay */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  pointer-events: none; /* Makes sure the overlay doesn't interfere with clicking */
+  z-index: 0;
+}
+
+/* App container */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1; /* Ensures content stays above the background pattern */
+}
+
+
+
+/* Wrapper for route content */
+.route-content {
+  
+  background-color: rgba(255, 255, 255, 0.389);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Make sure your router content fills the space between navbar and footer */
+.router-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .route-content {
+    padding: 1rem;
+  }
+}
+
+
+
+/* NavBar with Logo Styles */
+
+header {
+  background-color: #0a6240;
+  color: #d7bcbc;
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 70px;
+  margin-right: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+}
+
+nav ul li {
+  margin: 0 25px;
+}
+
+nav ul li a {
+  color: #e2aeae;
+  text-decoration: none;
+}
+
+.search-login {
+  display: flex;
+  align-items: center;
+  margin-right: 1px;
+}
+
+.search-login input {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+.search-login button {
+  background-color: #fff;
+  color: #0f0d0d;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.login{
+  background-color: #fff;
+  color: #330D0F;
+  border-radius: 7px;
+  margin-left: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.cart-icon {
+  width: 35px; /* Adjust size as needed */
+  height: 35px; /* Adjust size as needed */
+  margin-left: 25px; /* Space between login button and cart icon */
+  margin-right: 10px;
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/*style footer*/
+
+footer {
+  background-color: #0a6240;
+  color: #fdefef;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 0; /* Remove rounded corners */
+  box-shadow: none; /* Remove shadow */
+  background-color: transparent; /* Optional: remove background color */
+}
+
+
+/* Footer Social Media Icons */
+/* Container for all social media icons */
+.social-media {
+  display: flex;          /* Arranges items in a row */
+  align-items: center;    /* Centers items vertically */
+  gap: 20px;              /* Adds space between each icon */
+}
+
+/* Styling for each social media link */
+.social-media a {
+  display: flex;                  /* Enables centering of icons within the circle */
+  justify-content: center;        /* Centers icon horizontally */
+  align-items: center;            /* Centers icon vertically */
+  width: 40px;                    /* Sets the width of the circular background */
+  height: 40px;                   /* Sets the height of the circular background */
+  border-radius: 50%;             /* Makes the background circular (50% = circle) */
+  background-color: #f5f5f5;      /* Light gray background color */
+  color: #333;                    /* Dark gray color for the icons */
+  text-decoration: none;          /* Removes the underline from links */
+  transition: all 0.3s ease;      /* Adds smooth transition for hover effects */
+}
+
+/* Hover effect - what happens when you move your mouse over an icon */
+.social-media a:hover {
+  background-color: #333;         /* Changes to dark background on hover */
+  color: #fff;                    /* Changes to white icon color on hover */
+  transform: translateY(-3px);    /* Moves the icon slightly upward */
+}
+
+/* Size of the actual icon */
+.social-media-icons {
+  font-size: 18px;                /* Sets the size of the icons */
+}
+
+.footer-links, .legal-links {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-links a, .legal-links a {
+  color: #7e8380;
+  text-decoration: none;
+}
+
+.powered-by {
+  text-align: center;
+  margin: 10px 0;
+}
+
+  /* Style OrderList */
+
+.order-container {
+  border: 1px solid #ddd;
+  margin: 15px 0;
+  background-color: white;
+}
+
+.order-header {
+  background-color: #343a40;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-title {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.checkout-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.orders-section {
+  padding: 15px;
+}
+
+.orders-heading {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th, 
+.orders-table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.orders-table th {
+  background-color: #f9f9f9;
+  font-weight: normal;
+}
+
+.orders-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.edit-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-cash {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.payment-online {
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+
+/* Style OrderForm */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
+}
+
+.form-row {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-row-full {
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-input-half {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.form-select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 15px;
+}
+
+.submit-button {
+  padding: 8px 16px;
+  background-color: #8bc34a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.cancel-button {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: #666;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Style DeliveryForm */
+.delivery-management-form {
+  font-family: Arial, sans-serif;
+  max-width: 540px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.dm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #343a40;
+  padding: 12px 15px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.dm-title {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.dm-all-delivery-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.dm-form-body {
+  padding: 20px;
+}
+
+.dm-form-group {
+  margin-bottom: 15px;
+}
+
+.dm-label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.dm-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.dm-input::placeholder {
+  color: #aaa;
+}
+
+.dm-date-container {
+  position: relative;
+}
+
+.dm-date-input {
+  padding-right: 30px;
+}
+
+.dm-calendar-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  pointer-events: none;
+}
+
+.dm-select-container {
+  position: relative;
+}
+
+.dm-select-container::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #666;
+  pointer-events: none;
+}
+
+.dm-select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: white;
+}
+
+.dm-submit-btn {
+  background-color: #8bc34a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.dm-submit-btn:hover {
+  background-color: #7cb342;
+}
+
+/* Hide default calendar icon in date input */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+
+/* Style DeliveryStatusReport */
+.dsr-container {
+  font-family: Arial, sans-serif;
+  max-width: 100%;
+  margin: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  overflow: hidden;
+}
+
+.dsr-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg,  #0a6240 0%,  #109360 100%);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.dsr-title {
+  color: white;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.dsr-table-container {
+  padding: 5px;
+  overflow-x: auto;
+}
+
+.dsr-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.dsr-table th {
+  background-color: #f8f9fa;
+  color: #495057;
+  padding: 12px 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.dsr-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e9ecef;
+  color: #333;
+}
+
+.dsr-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.dsr-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dsr-id-cell {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+.dsr-status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.dsr-status-badge.completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.dsr-status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.dsr-status-badge.in_progress {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.dsr-status-badge.cancelled, 
+.dsr-status-badge.incomplete {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.back-nav-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 20px 0;
+  background-color: #a5a5a5;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.checkout-icon{
+  width: 20px;
+}
+
+@media (max-width: 768px) {
+  .dsr-table {
+    font-size: 13px;
+  }
+  
+  .dsr-table th,
+  .dsr-table td {
+    padding: 10px;
+  }
+  
+  .dsr-title {
+    font-size: 18px;
+  }
+}
